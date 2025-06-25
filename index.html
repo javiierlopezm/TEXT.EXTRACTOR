@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TEXT.EXTRACTOR - Inicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-green: #2ecc40;
+            --main-green-dark: #145a32;
+            --main-green-light: #a3ffcb;
+            --main-bg: #16281d;
+            --radius-main: 32px;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--main-bg);
+            color: #eafff2;
+            margin: 0;
+            min-height: 100vh;
+        }
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            z-index: 0;
+            border-radius: 50%;
+            opacity: 0.28;
+            pointer-events: none;
+            filter: blur(32px);
+            animation: float 22s infinite alternate;
+        }
+        body::before {
+            width: 700px;
+            height: 700px;
+            left: -220px;
+            top: -180px;
+            background: radial-gradient(circle at 30% 30%, #2ecc40 70%, #145a32 100%);
+            animation-delay: 0s;
+        }
+        body::after {
+            width: 800px;
+            height: 800px;
+            right: -260px;
+            bottom: -180px;
+            background: radial-gradient(circle at 70% 70%, #a3ffcb 60%, #2ecc40 100%);
+            opacity: 0.18;
+            animation-delay: 6s;
+        }
+        @keyframes float {
+            0% { transform: scale(1) translateY(0);}
+            45% { transform: scale(1.08) translateY(30px);}
+            100% { transform: scale(0.97) translateY(-15px);}
+        }
+        .layout {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            gap: 48px;
+        }
+        aside {
+            width: 140px;
+            min-height: 800px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .ads-placeholder {
+            width: 120px;
+            height: 800px;
+            background: rgba(46,204,64,0.10);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b0eac5;
+            font-size: 1.1em;
+            border: 2px dashed #1e7e34;
+        }
+        main {
+            flex: 1 1 1200px;
+            max-width: 1200px;
+            margin: 60px 0;
+            background: rgba(20, 90, 50, 0.92);
+            border-radius: var(--radius-main);
+            box-shadow: 0 12px 48px 0 #2ecc4066, 0 8px 48px 0 #a3ffcb55;
+            padding: 0 0 48px 0;
+            min-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 0 24px 0;
+        }
+        .logo-svg {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0px 8px 32px #2ecc4099);
+            opacity: 0.95;
+        }
+        .logo-text {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 3.2em;
+            font-weight: 800;
+            color: #eafff2;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            text-shadow: 0 4px 24px #2ecc40b0;
+        }
+        .logo-dot {
+            color: #a3ffcb;
+            font-size: 1.1em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #a3ffcb;
+            font-size: 1.25em;
+            font-weight: 500;
+            margin-bottom: 0;
+            margin-top: 0;
+            letter-spacing: 0.08em;
+        }
+        .welcome-message {
+            color: #a3ffcb;
+            font-size: 1.4em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 28px;
+            margin-top: 24px;
+            letter-spacing: 0.04em;
+        }
+        .about {
+            background: rgba(22, 40, 29, 0.7);
+            border-radius: 18px;
+            color: #eafff2;
+            font-size: 1.18em;
+            padding: 32px 38px;
+            margin: 0 38px 28px 38px;
+            text-align: center;
+            box-shadow: 0 2px 16px #2ecc4022;
+        }
+        .main-btn {
+            display: inline-block;
+            margin: 36px auto 0 auto;
+            padding: 22px 64px;
+            background: linear-gradient(90deg, #2ecc40 60%, #a3ffcb 100%);
+            color: #145a32;
+            border-radius: 14px;
+            text-decoration: none;
+            font-size: 1.25em;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            transition: background 0.2s, transform 0.13s, box-shadow 0.19s;
+            box-shadow: 0 2px 18px 0 #2ecc4044;
+            border: none;
+            outline: none;
+        }
+        .main-btn:hover, .main-btn:focus {
+            background: linear-gradient(90deg, #a3ffcb 20%, #2ecc40 80%);
+            transform: scale(1.06);
+            box-shadow: 0 10px 30px #a3ffcb88, 0 2px 16px #2ecc4044;
+        }
+        @media (max-width: 1200px) {
+            .layout { gap: 18px; }
+            aside { width: 80px; }
+            .ads-placeholder { width: 60px; height: 400px; font-size: 0.95em; }
+        }
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; align-items: center; }
+            aside { display: none; }
+            main { width: 99vw; max-width: 99vw; min-width: unset; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside>
+            <div class="ads-placeholder">
+                Ads
+            </div>
+        </aside>
+        <main>
+            <div class="header">
+                <svg class="logo-svg" viewBox="0 0 90 90" fill="none">
+                    <defs>
+                        <radialGradient id="grad" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
+                          <stop offset="0%" stop-color="#a3ffcb" />
+                          <stop offset="100%" stop-color="#2ecc40" />
+                        </radialGradient>
+                        <radialGradient id="gradPink" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
+                          <stop offset="0%" stop-color="#eafff2" />
+                          <stop offset="100%" stop-color="#a3ffcb" />
+                        </radialGradient>
+                    </defs>
+                    <circle cx="45" cy="45" r="38" fill="url(#grad)" />
+                    <rect x="27" y="23" width="36" height="44" rx="7" fill="#fff" stroke="#2ecc40" stroke-width="2"/>
+                    <rect x="33" y="32" width="24" height="6" rx="2.5" fill="url(#gradPink)" opacity="0.16"/>
+                    <rect x="33" y="45" width="18" height="4.5" rx="2" fill="#2ecc40" opacity="0.17"/>
+                    <rect x="33" y="57" width="12" height="3" rx="1.5" fill="#a3ffcb" opacity="0.13"/>
+                    <circle cx="60" cy="67" r="2.1" fill="#a3ffcb" opacity="0.8"/>
+                    <circle cx="66" cy="67" r="1.5" fill="#2ecc40" opacity="0.7"/>
+                </svg>
+                <div class="logo-text">
+                    TEXT<span class="logo-dot">.</span>EXTRACTOR
+                </div>
+                <div class="subtitle">
+                    Extrae el texto de tus PDFs fácil y seguro.
+                </div>
+            </div>
+            <div class="welcome-message">
+                Bienvenido a TEXT.EXTRACTOR
+            </div>
+            <div class="about">
+                <b>¿Qué hacemos?</b><br>
+                <span style="font-size:1.18em; color:#a3ffcb;">
+                    <b>🚀 ¡Transforma tus documentos como nunca antes!</b><br><br>
+                    <span style="color:#fff;">
+                        • <b>Convierte tus archivos PDF a Word</b> en segundos y mantén el formato original.<br>
+                        • <b>Convierte tus documentos Word a PDF</b> de forma rápida y segura.<br>
+                        • <b>Extrae el texto de cualquier PDF</b> al instante, sin complicaciones.<br><br>
+                        <b>¡Todo gratis, online y sin registros!</b><br>
+                        Tu privacidad es lo primero: no guardamos tus archivos ni tus textos.
+                    </span>
+                </span>
+                <div style="text-align:center; margin: 24px 0 32px 0;">
+                <a href="{{ url_for('terminos_condiciones') }}" style="background:#00d2ff; color:#003344; padding:12px 28px; border-radius:8px; text-decoration:none; font-weight:700; box-shadow:0 2px 12px #00d2ff44;">
+                    Términos y Condiciones
+                </a>
+            </div>
+            <a class="main-btn" href="{{ url_for('index') }}">Ir al extractor de PDF</a>
+            <a class="main-btn" href="{{ url_for('pdf_to_word') }}">Convertir PDF a Word</a>
+            <a class="main-btn" href="{{ url_for('word_to_pdf') }}">Convertir Word a PDF</a>
+        </main>
+        
+        <aside>
+            <div class="ads-placeholder">
+                Ads
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
